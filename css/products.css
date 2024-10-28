@@ -1,0 +1,62 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#parentProduct{
+    margin: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#products{
+    width: 100%; /* Table takes full width of the container */
+    border-collapse: separate; /* Use separate borders */
+    border-spacing: 0 10px; /* Sets vertical gap between rows (10px) */
+    text-align: center;
+}
+
+/* Table header style */
+#products thead tr th{
+    padding: 1rem;
+    background-color: rgb(77, 46, 34);
+    font-size: 1.5rem;
+    font-weight: bolder;
+
+    color: white;
+}
+
+.productData{
+    border: 1px solid rgb(187, 166, 154);
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+.productData > *{
+    font-size: 1.2rem;
+    border: none;
+    text-align: center;
+}
+
+#edit{
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: rgb(116, 22, 10);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+#edit:hover{
+    background-color: rgb(78, 13, 4);
+}
+
+#save{
+    padding: 10px 15px;
+    background-color: rgb(116, 22, 10);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+#save:hover{
+    background-color: rgb(78, 13, 4);
+}
