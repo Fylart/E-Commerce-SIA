@@ -1,5 +1,5 @@
 <?php
-    include("database.php");
+    include("../database.php");
 
     // Get the ID from the query string
     if (isset($_GET['id'])) {
@@ -15,6 +15,6 @@
     }
 
     // Redirect back to edit page after deletion
-    header("Location: adminDashboard.php");
+    header("Location: ../adminDashboard.php");
     exit;
 ?>
