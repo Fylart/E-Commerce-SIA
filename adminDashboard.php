@@ -45,7 +45,7 @@
             </tbody>
         </table>
         <div style="text-align: right; margin-top: 20px;">
-            <a href="edit.php" id="edit">EDIT</a>
+            <a href="php/edit.php" id="edit">EDIT</a>
         </div>
     </div>
 

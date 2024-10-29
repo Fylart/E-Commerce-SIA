@@ -1,5 +1,5 @@
 <?php
-    include("database.php");
+    include("../database.php");
     // Get posted data
     $name = $_POST['name'];
     $price = $_POST['price'];
@@ -15,6 +15,6 @@
     $conn->close();
 
     // Redirect back to edit page after addition
-    header("Location: adminDashboard.php");
+    header("Location: ../adminDashboard.php");
     exit;
 ?>

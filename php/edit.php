@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="../css/products.css">
     <title>Document</title>
 </head>
 <body>
     <?php
-        include("database.php");
+        include("../database.php");
         // Prepare the SQL statement
         $sql = "SELECT id, name, price, stock FROM products ORDER BY id DESC";
         $stmt = $conn->prepare($sql);

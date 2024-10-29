@@ -1,5 +1,5 @@
 <?php
-    include("database.php");
+    include("../database.php");
     // Check connection
 
 
@@ -21,6 +21,6 @@
     $conn->close();
 
     // Redirect back to edit page or display a success message
-    header("Location: adminDashboard.php");
+    header("Location: ../adminDashboard.php");
     exit;
 ?>
