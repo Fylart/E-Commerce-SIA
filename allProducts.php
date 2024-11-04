@@ -20,7 +20,7 @@
         <div id="items">
 
         <div class="item">
-            <a href="" class="soloPage">
+            <a href="gabTeam\Cream_blush.php" class="soloPage">
                 <img src="gabTeam/img/Face/Creme Cushion Blush/IMG_0305.WEBP" class='itemImg'>
                 <h2>Cream Blush</h2>
             </a>
