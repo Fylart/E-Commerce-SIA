@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/products.css">
+    <link rel="stylesheet" href="css/Index.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
     <title>Document</title>
 </head>
 <body>
+    <!-- dito yung issue tine -->
     <?php
         include("../database.php");
+        include("../html/header.html");
         // Prepare the SQL statement
         $sql = "SELECT id, name, price, stock, description FROM products ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
@@ -129,6 +134,7 @@
 
         <?php
         // Close the statement and connection
+        include("../html/footer.html");
         $stmt->close();
         $conn->close();
     ?>
