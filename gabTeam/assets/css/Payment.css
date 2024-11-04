@@ -1,0 +1,142 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #FFFFFF;
+    color: #333;
+    height: 100vh; /* Sets height to 100% of viewport height */
+    display: flex; /* Enables flexbox for body */
+    flex-direction: column; /* Stacks children vertically */
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between; /* Aligns logo to the left and icons to the right */
+    align-items: center;
+    width: 100%; /* Makes the navbar take the full width of the page */
+    padding: 10px 20px; /* Adjusts navbar padding */
+    background-color: #FFF0EF;
+}
+
+
+.logo img {
+    width: 80px;
+    height: 80px;
+    margin-left: 10px;
+}
+.icons {  
+    display: flex;  
+    gap: 30px; /* Space between icons */  
+    font-size: 25px; /* Adjust icon size */
+    padding-right: 20px;
+    cursor: pointer;   
+}
+.icons i:hover {  
+    color: rgb(139, 106, 64); /* Darker shade on hover */  
+}  
+
+.icons a img {
+    width: 24px;
+    margin-left: 20px;  
+}
+
+/* Payment Section */
+.payment-container {
+    display: flex; /* Aligns form and summary side by side */
+    height: calc(100vh - 60px); /* Full height minus navbar height */
+    gap: 20px; /* Adjusts the gap between sections */
+    padding: 10px; /* Reduces padding around sections */
+}
+
+.form-container {
+    width: 60%; /* Payment form takes 60% of the space */
+    padding: 10px; /* Adds padding inside sections */
+    border: 1px solid #ccc; /* Adds border around sections */
+    border-radius: 5px; /* Rounds the corners */
+    background-color: #f9f9f9; /* Light background color for sections */
+    overflow-y: hidden; /* Hides overflow */
+    display: flex;
+    flex-direction: column; /* Aligns children vertically */
+    justify-content: space-between; /* Distributes space evenly */
+}
+
+.summary-container {
+    width: 40%; /* Order summary takes 40% of the space */
+    padding: 10px; /* Reduces padding inside sections */
+    border: 1px solid #ccc; /* Adds border around sections */
+    border-radius: 5px; /* Rounds the corners */
+    background-color: #f9f9f9; /* Light background color for sections */
+    display: flex;
+    flex-direction: column; /* Aligns children vertically */
+    justify-content: space-between; /* Distributes space evenly */
+}
+
+.form-container input, .form-container select {
+    width: 100%;
+    padding: 8px; /* Reduces input padding */
+    margin-bottom: 10px; /* Reduces margin between inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px; /* Decreases font size */
+}
+
+.form-container label {
+    font-weight: bold;
+    margin-bottom: 3px; /* Reduces margin below labels */
+    display: block;
+    color: #333;
+    font-size: 14px; /* Decreases label font size */
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.payment-methods img {
+    width: 150px; /* Adjusts image width */
+    height: 70px; /* Adjusts image height */
+    cursor: pointer;
+    padding: 3px; /* Reduces padding around images */
+    transition: border 0.3s ease;
+}
+
+.payment-methods img:hover {
+    border-color: #b582a3;
+}
+
+.pay-now {
+    background-color: #6f4d57;
+    color: #FFFFFF;
+    padding: 10px 15px; /* Reduces button padding */
+    font-size: 14px; /* Decreases button font size */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin: 0; /* Removes spacing above and below button */
+}
+
+.summary-container h2 {
+    margin: 0; /* Removes margin below the heading */
+}
+
+.summary-container p {
+    margin: 0; /* Removes margin below the paragraph */
+}
+
+.copyright {
+    text-align: center; /* Centers the copyright text */
+    margin-top: 0; /* Removes margin above copyright */
+    font-size: 12px; /* Decreases copyright font size */
+    color: #333;
+    padding-top: 5px; /* Optional padding to separate copyright from button */
+}

@@ -4,6 +4,7 @@ body{
 }
 
 #parentProduct{
+    overflow-x: auto;
     margin: 3rem;
     margin-top: 0;
     margin-bottom: 0;

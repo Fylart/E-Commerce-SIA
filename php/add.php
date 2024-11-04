@@ -1,4 +1,5 @@
 <?php
+    /* this is a decrepit version, te latest is addSoloTest.php */
     include("../database.php");
     // Get posted data
     $name = $_POST['name'];
