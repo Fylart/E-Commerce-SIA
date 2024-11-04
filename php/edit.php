@@ -54,6 +54,9 @@
 
 
             <form action="addSoloTest.php" method="POST" enctype="multipart/form-data">
+                <div style="text-align: right; margin-top: 20px;">
+                    <input type="submit" value="Add Product" id="save"/>
+                </div>
                 <table id="products">
                     <thead>
                         <tr>
@@ -74,9 +77,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div style="text-align: right; margin-top: 20px;">
-                    <input type="submit" value="Add Product" id="save"/>
-                </div>
+
             </form>
         </div>
 
