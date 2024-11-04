@@ -48,10 +48,11 @@
             </form> -->
 
 
-            <form action="addSoloTest.php" method="POST">
+            <form action="addSoloTest.php" method="POST" enctype="multipart/form-data">
                 <table id="products">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Stock</th>
@@ -60,6 +61,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td class='productData'><input type="file" name="fileToUpload" id="fileToUpload" required/></td>
                             <td class='productData'><input type="text" name="name" required /></td>
                             <td class='productData'><input type="number" name="price" step="0.01" required /></td>
                             <td class='productData'><input type="number" name="stock" required /></td>

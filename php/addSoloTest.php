@@ -6,18 +6,81 @@
     $stock = $_POST['stock'];
     $desc = $_POST['desc'];
 
+
+
+
+    /* this is for storing the image */
+    // Directory where the uploaded images will be saved
+    $target_dir = "../images/"; // Ensure this folder exists and has write permissions
+    $original_file_name = basename($_FILES["fileToUpload"]["name"]);
+    $imageFileType = strtolower(pathinfo($original_file_name, PATHINFO_EXTENSION));
+
+    // Initialize the target file path
+    $target_file = $target_dir . $original_file_name;
+    $uploadOk = 1;
+
+    // Check if the form was submitted
+    // Check if the uploaded file is an actual image
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if ($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+
+    // Check for existing files and append a number if necessary
+    $counter = 1;
+    while (file_exists($target_file)) {
+        // Create a new filename with an incremented number
+        $target_file = $target_dir . pathinfo($original_file_name, PATHINFO_FILENAME) . "($counter)." . $imageFileType;
+        $counter++;
+    }
+
+    // Check file size (optional)
+    if ($_FILES["fileToUpload"]["size"] > 50000000) { // Limit size to 500KB
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if everything is ok to upload
+    if ($uploadOk == 1) {
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            echo "The file " . htmlspecialchars(basename($target_file)) . " has been uploaded.";
+            /* echo "<br>" . $target_file . "<br>"; */
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    } else {
+        echo "Your file was not uploaded due to errors.";
+    }
+
+
+
+
+
     // Prepare and execute insert statement
-    $stmt = $conn->prepare("INSERT INTO products (name, price, stock, description) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sdis", $name, $price, $stock,$desc);
+    $stmt = $conn->prepare("INSERT INTO products (name, price, stock, description, imgDir) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sdiss", $name, $price, $stock,$desc, $target_file);
     $stmt->execute();
 
+
+
+
+
+    /* This is for create file for the solo page */
     // Specify the path and name of the new HTML file
     $fileName = '../solo/' . $name . '.php';
     
     // Open the file for writing (this will create the file if it doesn't exist)
     $fileHandle = fopen($fileName, 'w') or die('Unable to open file!');
-
-
 
     $content = <<<EOD
         <!DOCTYPE html>
@@ -37,14 +100,14 @@
                 \$currentFileName = basename(__FILE__, '.php');
 
                 // Prepare the SQL statement
-                \$sql = "SELECT id, name, price, stock, description FROM products WHERE name = '{\$currentFileName}' ORDER BY id DESC";
+                \$sql = "SELECT id, name, price, stock, description, imgDir FROM products WHERE name = '{\$currentFileName}' ORDER BY id DESC";
                 \$stmt = \$conn->prepare(\$sql);
 
                 // Execute the statement
                 \$stmt->execute();
 
                 // Bind result variables
-                \$stmt->bind_result(\$id, \$name, \$price, \$stock, \$desc);
+                \$stmt->bind_result(\$id, \$name, \$price, \$stock, \$desc, \$imgDir);
                 \$stmt->fetch();
             ?>
 
@@ -76,12 +139,13 @@
             <section class="product-container container mt-4">
                 <div class="row">
                     <div class="col-md-6 product-image text-center">
-                        <img id="mainProductImage" src="img/Lips/Lip treatment hydrating balm/IMG_0309.WEBP" alt="Product Image" class="img-fluid rounded">
-                        <div class="product-thumbnails d-flex justify-content-center mt-4">
-                            <img src="img/Lips/Lip treatment hydrating balm/IMG_0310.WEBP" alt="Thumbnail 1" class="me-2 rounded" onclick="changeProductImage(this)">
-                            <img src="img/Lips/Lip treatment hydrating balm/IMG_0311.WEBP" alt="Thumbnail 2" class="me-2 rounded" onclick="changeProductImage(this)">
-                            <img src="img/Lips/Lip treatment hydrating balm/IMG_0312.WEBP" alt="Thumbnail 3" class="me-2 rounded" onclick="changeProductImage(this)">
-                        </div>
+                        <img id="mainProductImage" 
+                        src="
+                                <?php
+                                    echo htmlspecialchars(\$imgDir);
+                                ?>
+                            " 
+                        alt="Product Image" class="img-fluid rounded">
                     </div>
                     <div class="col-md-6 product-details">
                         <h1 class="product-title">
@@ -167,6 +231,11 @@
 
     echo "File '$fileName' created successfully.";
 
+
+
+
+
+    /* this is the end of database */
     $stmt->close();
     $conn->close();
 

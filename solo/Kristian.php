@@ -85,7 +85,7 @@
                     <!-- Add to Cart Button -->
                     <button class="add-to-cart">Add to Cart</button>
 
-                    <div class="product-description mt-4">
+                    <div class="">
                         <p class="section-title">Description:</p>
 
                         <?php

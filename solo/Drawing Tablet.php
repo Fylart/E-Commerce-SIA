@@ -15,14 +15,14 @@
             $currentFileName = basename(__FILE__, '.php');
 
             // Prepare the SQL statement
-            $sql = "SELECT id, name, price, stock, description FROM products WHERE name = '{$currentFileName}' ORDER BY id DESC";
+            $sql = "SELECT id, name, price, stock, description, imgDir FROM products WHERE name = '{$currentFileName}' ORDER BY id DESC";
             $stmt = $conn->prepare($sql);
 
             // Execute the statement
             $stmt->execute();
 
             // Bind result variables
-            $stmt->bind_result($id, $name, $price, $stock, $desc);
+            $stmt->bind_result($id, $name, $price, $stock, $desc, $imgDir);
             $stmt->fetch();
         ?>
 
@@ -54,12 +54,13 @@
         <section class="product-container container mt-4">
             <div class="row">
                 <div class="col-md-6 product-image text-center">
-                    <img id="mainProductImage" src="img/Lips/Lip treatment hydrating balm/IMG_0309.WEBP" alt="Product Image" class="img-fluid rounded">
-                    <div class="product-thumbnails d-flex justify-content-center mt-4">
-                        <img src="img/Lips/Lip treatment hydrating balm/IMG_0310.WEBP" alt="Thumbnail 1" class="me-2 rounded" onclick="changeProductImage(this)">
-                        <img src="img/Lips/Lip treatment hydrating balm/IMG_0311.WEBP" alt="Thumbnail 2" class="me-2 rounded" onclick="changeProductImage(this)">
-                        <img src="img/Lips/Lip treatment hydrating balm/IMG_0312.WEBP" alt="Thumbnail 3" class="me-2 rounded" onclick="changeProductImage(this)">
-                    </div>
+                    <img id="mainProductImage" 
+                    src="
+                            <?php
+                                echo htmlspecialchars($imgDir);
+                            ?>
+                        " 
+                    alt="Product Image" class="img-fluid rounded">
                 </div>
                 <div class="col-md-6 product-details">
                     <h1 class="product-title">
