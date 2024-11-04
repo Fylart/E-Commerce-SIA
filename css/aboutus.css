@@ -1,0 +1,57 @@
+body{
+    margin: 0;
+}
+
+hr {
+    size: 100px;
+}
+
+h2, h3 {
+    color: rgb(83 48 54 / 79%);
+}
+
+.aboutUs {
+    text-align: left;
+    margin-left: 0;
+}
+
+.background-image {
+    display: block;
+    margin: 0 auto;
+}
+
+.p_description {
+    margin-top: 10px; /* Adjust the spacing as needed */
+    text-align: left;
+    font-size: 20px;
+    color: rgb(83 48 54 / 79%); 
+    max-width: 1150px; /* Set a max width to control paragraph width */
+    margin-left: 0;
+    margin: auto;
+}
+
+h1 {
+    font-family: Arial;
+    font-size: 50px;
+    text-align: center;
+    color: rgb(83 48 54 / 79%);
+}
+
+h2{
+    margin-top: 10px; /* Adjust the spacing as needed */
+    text-align: left;
+    color: rgb(83 48 54 / 79%);
+    max-width: 1150px; /* Set a max width to control paragraph width */
+    margin-left: 0;
+    margin: auto;
+}
+
+img {
+    width: 1150px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
