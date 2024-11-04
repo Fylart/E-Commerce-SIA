@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--     <link rel="stylesheet" href="css/footer.css"> -->
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/allProducts.css">
-<!--     <link rel="stylesheet" href="css/header.css"> -->
+    <link rel="stylesheet" href="css/header.css">
     <title>Document</title>
 </head>
 <body>
     
     <?php
         include("database.php");
-/*         include("html/header.html"); */
+        include("html/header.html");
     ?>
 
     <div class="category">
@@ -43,7 +43,7 @@
         <div class="item">
             <a href="" class="soloPage">
                 <img src="gabTeam/img/Eyes/Holy Grail Lash Lift Mascara/IMG_0277.WEBP" class='itemImg'>
-                <h2>Holy Grail Lash Lift Mascara</h2>
+                <h2>Lash Lift Mascara</h2>
             </a>
 
             <h3 class="price">₱499.00</h3>
@@ -198,7 +198,7 @@
     </div>
 
     <?php
-        /* include("html/footer.html"); */
+        include("html/footer.html");
     ?>
 </body>
 </html>
