@@ -10,19 +10,22 @@
     <?php
         include("../database.php");
         // Prepare the SQL statement
-        $sql = "SELECT id, name, price, stock FROM products ORDER BY id DESC";
+        $sql = "SELECT id, name, price, stock, description FROM products ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
 
         // Execute the statement
         $stmt->execute();
 
         // Bind result variables
-        $stmt->bind_result($id, $name, $price, $stock);
+        $stmt->bind_result($id, $name, $price, $stock, $desc);
         ?>
 
         <div id="parentProduct">
             <h1>ADD NEW PRODUCT</h1>
-            <form action="add.php" method="POST">
+
+
+            
+<!--             <form action="add.php" method="POST">
                 <table id="products">
                     <thead>
                         <tr>
@@ -36,6 +39,33 @@
                             <td class='productData'><input type="text" name="name" required /></td>
                             <td class='productData'><input type="number" name="price" step="0.01" required /></td>
                             <td class='productData'><input type="number" name="stock" required /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right; margin-top: 20px;">
+                    <input type="submit" value="Add Product" id="save"/>
+                </div>
+            </form> -->
+
+
+            <form action="addSoloTest.php" method="POST" enctype="multipart/form-data">
+                <table id="products">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class='productData'><input type="file" name="fileToUpload" id="fileToUpload" required/></td>
+                            <td class='productData'><input type="text" name="name" required /></td>
+                            <td class='productData'><input type="number" name="price" step="0.01" required /></td>
+                            <td class='productData'><input type="number" name="stock" required /></td>
+                            <td class='productData'><input type="text" name="desc" required /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -58,6 +88,7 @@
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Stock</th>
+                                <th>Description</th>
                                 <th>Deletion</th> <!-- New Delete column -->
                             </tr>
                         </thead>
@@ -70,6 +101,7 @@
                                 echo "<td class='productData'><input type='text' name='name[]' value='" . htmlspecialchars($name) . "' /></td>";
                                 echo "<td class='productData'><input type='number' name='price[]' value='" . htmlspecialchars($price) . "' step='0.01' /></td>";
                                 echo "<td class='productData'><input type='number' name='stock[]' value='" . htmlspecialchars($stock) . "' /></td>";
+                                echo "<td class='productData'><input type='text' name='description[]' value='" . htmlspecialchars($desc) . "' /></td>";
                                 echo "<input type='hidden' name='id[]' value='" . htmlspecialchars($id) . "' />";
                                                 // Add a delete link in the new column
                                 echo "<td class='productData'><a href='delete.php?id=" . htmlspecialchars($id) . "' onclick=\"return confirm('Are you sure you want to delete this item?');\">Delete</a></td>";

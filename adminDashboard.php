@@ -9,15 +9,16 @@
 <body>
     <?php
         include("database.php");
+
         // Prepare the SQL statement
-        $sql = "SELECT id, name, price, stock FROM products ORDER BY id DESC";
+        $sql = "SELECT id, name, price, stock, description FROM products ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
 
         // Execute the statement
         $stmt->execute();
 
         // Bind result variables
-        $stmt->bind_result($id, $name, $price, $stock);
+        $stmt->bind_result($id, $name, $price, $stock, $desc);
     ?>
 
     <div id="parentProduct">
@@ -28,6 +29,7 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Stock</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +41,7 @@
                             echo "<td class='productData'>" . htmlspecialchars($name) . "</td>";
                             echo "<td class='productData'>$" . number_format($price, 2) . "</td>";
                             echo "<td class='productData'>" . htmlspecialchars($stock) . "</td>";
+                            echo "<td class='productData'>" . htmlspecialchars($desc) . "</td>";
                         echo "</tr>";
                     }
                 ?>

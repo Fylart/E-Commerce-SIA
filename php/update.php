@@ -8,11 +8,12 @@
     $names = $_POST['name'];
     $prices = $_POST['price'];
     $stocks = $_POST['stock'];
+    $desc = $_POST['description'];
 
     // Prepare and execute update statements for each product
     for ($i = 0; $i < count($ids); $i++) {
-        $stmt = $conn->prepare("UPDATE products SET name=?, price=?, stock=? WHERE id=?");
-        $stmt->bind_param("sdii", $names[$i], $prices[$i], $stocks[$i], $ids[$i]);
+        $stmt = $conn->prepare("UPDATE products SET name=?, price=?, stock=?, description = ? WHERE id=?");
+        $stmt->bind_param("sdisi", $names[$i], $prices[$i], $stocks[$i], $desc[$i], $ids[$i]);
         $stmt->execute();
     }
 

@@ -1,0 +1,220 @@
+/* General Reset */  
+* {  
+    margin: 0;  
+    padding: 0;  
+    box-sizing: border-box;  
+    font-family: 'Montserrat', sans-serif;  
+}  
+
+body {  
+    background-color: #FFFFFF;  
+    color: #333;  
+}  
+
+/* Header */  
+header {  
+    background-color: #FFF0EF; /* Light pink background for the header */  
+    width: 100%; /* Make sure header uses full width */  
+}  
+
+.nav-container {  
+    display: flex;  
+    justify-content: space-between; /* Space items evenly */  
+    align-items: center; /* Center items vertically */  
+    padding: 10px 20px; /* Add some padding */  
+}  
+
+.logo img {  
+    width: 80px; /* Adjust size based on your logo */  
+    height: 80px;  
+}  
+
+.nav {  
+    list-style: none;  
+    display: flex;  
+    gap: 30px; /* Space between nav items */  
+    flex-grow: 1; /* Allow nav to grow */  
+    justify-content: center; /* Center the nav items */  
+}  
+
+.nav-link {  
+    color: #8f7745; /* Color for nav links */  
+    text-decoration: none;  
+    font-weight: bold;  
+    padding: 10px 15px; /* Padding for clickable area */  
+    transition: color 0.3s; /* Smooth color transition */  
+}  
+
+.nav-link:hover {  
+    color: rgb(248, 220, 185); /* Darker shade on hover */  
+}  
+
+.icons {  
+    display: flex;  
+    gap: 30px; /* Space between icons */  
+    font-size: 20px; /* Adjust icon size */
+    padding-right: 10px;  
+}  
+
+.icons i {  
+    color: #8f7745; /* Adjust icon color */  
+    cursor: pointer;  
+}  
+
+.icons i:hover {  
+    color: rgb(255, 220, 178); /* Darker shade on hover */  
+}  
+
+
+
+/* Product Details */
+.product-container {
+    display: flex;
+    justify-content: center; /* Center the child elements */
+    align-items: flex-start; /* Align items at the top */
+    gap: 40px; /* Increase gap if needed */
+    padding: 40px; /* Ensures there's space around the section */
+}
+
+
+.product-image {
+    flex: 1;
+    text-align: center;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 500px; /* Maintain max width */
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.product-thumbnails img {
+    width: 95px;
+    border-radius: 8px;
+}
+
+.product-details {
+    flex: 1; /* Change to flex: 1 to retain even proportion */
+    max-width: 400px; /* Optional: maintain a max width for better layout */
+    padding-left: 20px; /* Add padding for some space */
+    padding-right: 20px; /* Add padding for some space */
+}
+
+.product-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #b582a3;
+    margin: 10px 0;
+}
+
+.variant-section {
+    margin-top: 15px;
+}
+
+.variant-label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.variant-select {
+    padding: 8px;
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.add-to-cart {
+    background-color: #6f4d57;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block; /* Centering the button */
+    width: 100%; /* Make the button the width of its container */
+}
+.row {
+    margin-right: 30%;
+}
+.product-description {
+    margin: 20px 0;
+    line-height: normal;
+    width: 250%;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+    background-color: #FFF0EF;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.footer-logo img {
+    width: 50px; /* Logo size */
+}
+
+.footer-links {
+    margin: 10px 0; /* Add some margin between elements */
+}
+
+.footer-links a {
+    color: #8f7745; /* Link color matching your theme */
+    text-decoration: none;
+    margin: 0 15px; /* Spacing between links */
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    text-decoration: underline; /* Underline on hover for better interaction */
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons i {
+    color: #8f7745; /* Icon color matches link color */
+    margin: 0 20px; /* Spacing between icons */
+    font-size: 25px; /* Adjust icon size */
+    cursor: pointer;
+}
+
+.social-icons i:hover {
+    color: rgb(255, 220, 178); /* Change color on hover */
+}
+
+body {
+    min-height: 100vh; /* Ensures body takes at least full viewport height */
+    padding-bottom: 80px; /* Prevents content from being hidden behind the footer */
+}

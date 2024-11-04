@@ -1,0 +1,48 @@
+header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .50s ease;
+    background-color: rgba(235, 172, 243, 0.164);
+}
+
+.logo{
+    width: 23%;
+    height: auto;
+}
+
+.navlist{
+    display: flex;
+    margin-right: 40px;
+    list-style: none;
+    padding-right: 15%;
+    gap: 1em;
+    
+}
+.navlist a{
+    display: inline-block;
+    margin: 8px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #8f7745;
+    transition: all .6s ease;
+}
+.right-content{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.search{
+    padding-right: 10px;
+    height: 45px;
+
+}
+.profile{
+    padding-right: 10px;
+    height: 40px;
+}
+.cart1{
+    padding-right: 70px;
+    height: 30px;
+}
