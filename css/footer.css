@@ -1,0 +1,73 @@
+/* footer section */
+footer{
+    width: 100%;
+    position: absolute;
+    background-color: rgba(235, 172, 243, 0.164);
+    color: #fff;
+    padding: 10px 15px;
+    font-size:10px;
+    font-family: 'Trebuchet MS';
+    line-height: 13px;
+    display: block;
+  }
+
+/* info section */
+.footer_info{
+        flex-basis: 17%;
+        padding: 40px;
+        font-size: 10%;
+        color: #fff;
+}
+
+.footer_info ul li{
+        list-style: none;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 20px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+    
+    /* navbar/ul li a section */
+.footer_info ul li a{
+        text-decoration: none;
+        color: rgb(187, 138, 138);
+        text-transform: uppercase;
+    }
+
+/* rows section */
+.footer_row{
+        width: 100%;
+        margin: 1px;
+        padding-right: 10%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      
+
+/* logo section */
+.footer_logo{
+        padding-top: 1%;
+        width: 100px;      
+}
+
+/*site section */
+.footer_facebook{
+        margin-left: 50px;
+        display: inline-block;
+        width: 40px;
+    
+        }
+
+.footer_twitter{
+        display: inline-block;
+        width: 40px;  
+        
+        }
+.footer_instagram{
+        display: inline-block;
+        width: 75px;     
+     
+        }
