@@ -5,6 +5,11 @@ body{
 hr {
     size: 100px;
 }
+
+h2, h3 {
+    color: rgb(83 48 54 / 79%);
+}
+
 .category{
     display: flex;
     flex-direction: column;
@@ -75,8 +80,8 @@ hr {
 .cart{
     display: block;
     text-decoration: none; /* Remove underline */
-    color: black; /* Set text color to black */
-    background-color: lightpink; /* Set background color to light pink */
+    color: rgb(83 48 54 / 79%); 
+    background-color: #E0BBB9; /* Set background color to light pink */
     padding: 15px; /* Add some padding for better appearance */
     margin: 20px;
     margin-left: 53px;
@@ -87,6 +92,8 @@ hr {
     font-size: .9rem;
     
 }
+
 .cart:hover{
-    background-color: #f08995; /* Optional: change background on hover */
+    background-color: #9c706e;
+    color: white;
 }
