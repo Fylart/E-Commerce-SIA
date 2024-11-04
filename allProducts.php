@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--     <link rel="stylesheet" href="css/footer.css"> -->
     <link rel="stylesheet" href="css/allProducts.css">
+<!--     <link rel="stylesheet" href="css/header.css"> -->
     <title>Document</title>
 </head>
 <body>
     <?php
         include("database.php");
+/*         include("html/header.html"); */
     ?>
 
     <div class="category">
@@ -40,5 +43,9 @@
             ?>
         </div>
     </div>
+
+    <?php
+        /* include("html/footer.html"); */
+    ?>
 </body>
 </html>
