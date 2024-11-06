@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/aboutus.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/header.css">
-    <title>Document</title>
+    <title>aboutUs</title>
 </head>
 <body>
     <?php
