@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/products.css">
+    <link rel="stylesheet" href="css/Index.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/header.css">
     <title>Document</title>
 </head>
 <body>
+    <!-- header -->
+    <header>
+        <a href="#"><img src="../images/logo.png" alt="" class="logo"></a>
+
+        <ul class="navlist">
+            <li><a href="#">home</a></li>
+            <li><a href="#">new</a></li>
+            <li><a href="#">makeup</a></li>
+            <li><a href="#">skincare</a></li>
+            <li><a href="#">sale</a></li>
+            <li><a href="#">about us</a></li>
+        </ul>
+
+        <div class="right-content">
+            <a href="#"><img src="../images/search.png" alt="" class="search"></a>
+            <a href="#"><img src="../images/profile.png" alt="" class="profile"></a>
+            <a href="#"><img src="../images/cart.png" alt="" class="cart1"></a>
+        </div>
+        </header>
+    <!-- end of header -->
     <?php
         include("../database.php");
         // Prepare the SQL statement
@@ -49,6 +72,9 @@
 
 
             <form action="addSoloTest.php" method="POST" enctype="multipart/form-data">
+                <div style="text-align: right; margin-top: 20px;">
+                    <input type="submit" value="Add Product" id="save"/>
+                </div>
                 <table id="products">
                     <thead>
                         <tr>
@@ -69,9 +95,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div style="text-align: right; margin-top: 20px;">
-                    <input type="submit" value="Add Product" id="save"/>
-                </div>
+
             </form>
         </div>
 
@@ -132,6 +156,45 @@
         $stmt->close();
         $conn->close();
     ?>
+
+<footer>
+        <div class="footer_row">
+            <div>
+                <a href="#"><img src="../images/logo.png" class="footer_logo"></a>
+            </div>
+
+            <div class="footer_info">
+                <ul>
+                    <li><a href="#">about us</a></li>
+                    <br><br>
+                    <li><a href="#">FAQS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_info">
+                <ul>
+                    <li><a href="#">store locator</a></li>
+                    <br><br>
+                    <li><a href="#">shipping and returns</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_info">
+                <ul>
+                    <li><a href="#">privacy and policy</a></li>
+                    <br><br>
+                    <li><a href="#">terms and conditions</a></li>
+                </ul>
+            </div>
+
+    
+            <div class="footer_info">
+                        <img src="../images/facebook.png" class="footer_facebook">
+                        <img src="../images/instagram.png" class="footer_instagram">
+                        <img src="../images/twitter.png" class="footer_twitter">  
+            </div>
+        </div> 
+    </footer>
 </body>
 </html>
 

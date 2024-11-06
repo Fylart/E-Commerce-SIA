@@ -1,6 +1,6 @@
 /* footer section */
 footer{
-    width: 100%;
+    width: 98%;
     position: absolute;
     background-color: rgba(235, 172, 243, 0.164);
     color: #fff;
@@ -14,7 +14,7 @@ footer{
 /* info section */
 .footer_info{
         flex-basis: 17%;
-        padding: 40px;
+        padding: 30px;
         font-size: 10%;
         color: #fff;
 }
@@ -38,11 +38,8 @@ footer{
 /* rows section */
 .footer_row{
         width: 100%;
-        margin: 1px;
-        padding-right: 10%;
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
         justify-content: space-between;
       }
       

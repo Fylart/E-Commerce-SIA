@@ -9,10 +9,29 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- header -->
+        <header>
+        <a href="#"><img src="images/logo.png" alt="" class="logo"></a>
+
+        <ul class="navlist">
+            <li><a href="index.php">home</a></li>
+            <li><a href="new.php">new</a></li>
+            <li><a href="makeup.php">makeup</a></li>
+            <li><a href="skincare.php">skincare</a></li>
+            <li><b><a href="allProducts.php">product</a></b></li>
+            <li><a href="aboutus.php">about us</a></li>
+        </ul>
+
+        <div class="right-content">
+            <a href="#"><img src="images/search.png" alt="" class="search"></a>
+            <a href="#"><img src="images/profile.png" alt="" class="profile"></a>
+            <a href="#"><img src="images/cart.png" alt="" class="cart1"></a>
+        </div>
+        </header>
+    <!-- end of header -->
+     
     <?php
         include("database.php");
-        include("html/header.html");
     ?>
 
     <div class="category">
@@ -20,7 +39,7 @@
         <div id="items">
 
         <div class="item">
-            <a href="" class="soloPage">
+            <a href="gabTeam\Cream_blush.php" class="soloPage">
                 <img src="gabTeam/img/Face/Creme Cushion Blush/IMG_0305.WEBP" class='itemImg'>
                 <h2>Cream Blush</h2>
             </a>
