@@ -1,5 +1,6 @@
 /* footer section */
 footer{
+    width: 98%;
     position: absolute;
     background-color: rgba(235, 172, 243, 0.164);
     color: #fff;
@@ -13,7 +14,7 @@ footer{
 /* info section */
 .footer_info{
         flex-basis: 17%;
-        padding: 40px;
+        padding: 30px;
         font-size: 10%;
         color: #fff;
 }
