@@ -208,7 +208,7 @@
                         echo'<h2>'. $name .'</h2>';
                     echo'</a>';
                     
-                    echo'<h3 class="price">' . $price . '</h3>';
+                    echo'<h3 class="price">₱' . $price . '</h3>';
                     echo'<a href="" class="cart">ADD TO CART</a>';        
                     echo'</div>';
                 }
