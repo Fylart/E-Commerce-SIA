@@ -84,7 +84,7 @@ h2, h3 {
     display: block;
     text-decoration: none; /* Remove underline */
     color: rgb(83 48 54 / 79%); 
-    background-color: #E0BBB9; /* Set background color to light pink */
+    background-color: #E0BBB9; 
     padding: 15px; /* Add some padding for better appearance */
     margin: 20px;
     margin-left: 53px;

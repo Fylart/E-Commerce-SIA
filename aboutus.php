@@ -10,7 +10,6 @@
 </head>
 <body>
     <?php
-    include("html/header.html");
     include("html/aboutUs.html");
     include("html/footer.html");
     ?>

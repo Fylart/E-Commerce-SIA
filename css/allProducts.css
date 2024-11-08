@@ -82,9 +82,8 @@ body{
     display: block;
     text-decoration: none; /* Remove underline */
 
-    color: black; /* Set text color to black */
-    background-color: lightpink; /* Set background color to light pink */
-
+    color: rgb(83 48 54 / 79%); 
+    background-color: #E0BBB9; 
 
     padding: 10px; /* Add some padding for better appearance */
     margin-left: 2rem;
@@ -97,5 +96,6 @@ body{
     
 }
 .cart:hover{
-    background-color: #f08995; /* Optional: change background on hover */
+    background-color: #9c706e;
+    color: white;
 }
