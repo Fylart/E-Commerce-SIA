@@ -143,6 +143,7 @@
                         src="
                                 <?php
                                     echo htmlspecialchars(\$imgDir);
+                                
                                 ?>
                             " 
                         alt="Product Image" class="img-fluid rounded">

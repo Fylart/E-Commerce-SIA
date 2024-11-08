@@ -1,0 +1,104 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+    font-family: "arial", sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-image: url("/images/background.png");
+    height: 100vh;
+}
+.login-page {
+    margin-top: 30px; /* Removes the gap at the top */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 420px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin-top: -20px; /* Adjust to bring form closer to the logo */
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 2px solid #69443c;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 27px;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #69443c;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #e0bbb9;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 27px;
+    transition: background 0.3s ease;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+    background: #000;
+}
+
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.form .message a {
+    color: #69443c;
+    text-decoration: none;
+}
+
+.login-label-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-label {
+    font-size: 40px;
+    font-weight: bold;
+    color: #69443c;
+    padding: 10px 20px;
+}
+
+.subtitle-label {
+    font-size: 16px;
+    color: #666;
+    margin-top: 3px;
+    text-decoration: none;
+}
