@@ -4,12 +4,13 @@ include 'db_connect.php'; // Include the database connection file
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = $_POST['firstname'];
     $lastName = $_POST['lastname'];
+    $address = $_POST['address'];
     $email = $_POST['email'];
     $password = $_POST['password']; // No hashing applied
 
-    $sql = "INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO users (firstName, lastName, address, email, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
+    $stmt->bind_param("sssss", $firstName, $lastName, $address, $email, $password);
 
     if ($stmt->execute()) {
         header("Location: login.php"); //redirrect to login if registration is successful!
@@ -43,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form class="register-form" action="register.php" method="POST">
                     <input type="text" name="firstname" placeholder="First Name" required/>
                     <input type="text" name="lastname" placeholder="Last Name" required/>
+                    <input type="text" name="address" placeholder="Address" required>
                     <input type="email" name="email" placeholder="Email" required/>
                     <input type="password" name="password" placeholder="Password" required/>
                     <button type="submit">SUBMIT</button>

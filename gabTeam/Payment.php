@@ -1,19 +1,14 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";  
-$password = "";      
-$dbname = "PaymentDB";  
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $order_placed = false;
-
+$payment_method = '';
+if (isset($_GET['cartData'])) {  
+    $cartData = json_decode(urldecode($_GET['cartData']), true);  
+    $_SESSION['cart'] = $cartData; // Save cart data in session  
+} else {  
+    $_SESSION['cart'] = []; // Initialize if no cart data is provided  
+}  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact_info = $_POST['contact'];  
     $region = $_POST['region'];
@@ -26,41 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $payment_method = $_POST['payment_method'];  
 
-    $sql = "INSERT INTO users (contact_info) VALUES ('$contact_info')";
-    if ($conn->query($sql) === TRUE) {
-        $user_id = $conn->insert_id;  
-
-        $sql = "INSERT INTO delivery_info (user_id, region, first_name, last_name, address, apartment, postal_code, city, phone)
-                VALUES ('$user_id', '$region', '$firstname', '$lastname', '$address', '$apartment', '$postal_code', '$city', '$phone')";
-        $conn->query($sql);
-
-        $sql = "INSERT INTO payment_methods (user_id, payment_method) VALUES ('$user_id', '$payment_method')";
-        $conn->query($sql);
-
-        $total_amount = 100.00;  
-        $sql = "INSERT INTO orders (user_id, total_amount) VALUES ('$user_id', '$total_amount')";
-        $conn->query($sql);
-
-        $order_id = $conn->insert_id;
-
-        if (!empty($_SESSION['cart'])) {
-            foreach ($_SESSION['cart'] as $item) {
-                $product_name = $item['name'];
-                $product_price = $item['price'];
-                $quantity = $item['quantity'];
-                $sql = "INSERT INTO order_items (order_id, product_name, product_price, quantity)
-                        VALUES ('$order_id', '$product_name', '$product_price', '$quantity')";
-                $conn->query($sql);
-            }
-        }
-
-        $order_placed = true;
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    // Simulate order placed without DB interaction
+    $order_placed = true;
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -73,13 +36,16 @@ $conn->close();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="assets/css/Payment.css" rel="stylesheet">
-
     <script>
         function showConfirmation() {
             let confirmation = confirm("Your order has been placed successfully! Click OK to continue.");
             if (confirmation) {
                 window.location.href = document.referrer;  
             }
+        }
+
+        function selectPaymentMethod(method) {
+            document.getElementById('payment_method').value = method;
         }
     </script>
 </head>
@@ -95,6 +61,7 @@ $conn->close();
             <i class="bi bi-cart"></i>  
         </div>
     </nav>
+    
 
     <section class="payment-container">
         <form method="POST" action="Payment.php">
@@ -119,43 +86,49 @@ $conn->close();
 
                 <h2 style="font-size: 16px;">Payment Method</h2>
                 <div class="payment-methods">
-                    <input type="radio" id="gcash" name="payment_method" value="GCash" required>
-                    <label for="gcash">GCash</label>
-                    <input type="radio" id="bpi" name="payment_method" value="BPI" required>
-                    <label for="bpi">BPI</label>
-                    <input type="radio" id="cod" name="payment_method" value="COD" required>
-                    <label for="cod">Cash on Delivery</label>
-                    <input type="radio" id="maya" name="payment_method" value="Maya" required>
-                    <label for="maya">Maya</label>
-                    <input type="radio" id="bdo" name="payment_method" value="BDO" required>
-                    <label for="bdo">BDO</label>
-                    <input type="radio" id="visa" name="payment_method" value="Visa" required>
-                    <label for="visa">Visa</label>
+                    <img src="img/payment-img/gcash.png" alt="GCash" onclick="selectPaymentMethod('GCash')">
+                    <img src="img/payment-img/bpi.png" alt="BPI" onclick="selectPaymentMethod('BPI')">
+                    <img src="img/payment-img/cod.png" alt="Cash on Delivery" onclick="selectPaymentMethod('COD')">
+                    <img src="img/payment-img/maya.png" alt="Maya" onclick="selectPaymentMethod('Maya')">
+                    <img src="img/payment-img/bdo.png" alt="BDO" onclick="selectPaymentMethod('BDO')">
+                    <img src="img/payment-img/visa.png" alt="Visa" onclick="selectPaymentMethod('Visa')">
                 </div>
-            </div>
-
-            <div class="summary-container">
-                <h2 style="font-size: 16px;">Order Summary</h2>
-                <?php if (!empty($_SESSION['cart'])): ?>
-                    <ul>
-                        <?php foreach ($_SESSION['cart'] as $item): ?>
-                            <li><?= htmlspecialchars($item['name']) ?> - ₱<?= htmlspecialchars($item['price']) ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php else: ?>
-                    <p>No items in your cart.</p>
-                <?php endif; ?>
-                <button type="submit" class="pay-now" onclick="showConfirmation()">Pay Now</button>
-                <div class="copyright">All rights reserved © Pure Aura</div>
+                <input type="hidden" name="payment_method" id="payment_method">
             </div>
         </form>
-    </section>
 
+        <div class="summary-container">
+                <h2 style="font-size: 16px;">Order Summary</h2>
+                <?php if (!empty($_SESSION['cart'])): ?>  
+    <ul class="order-summary">  
+        <?php  
+        $total_amount = 0;  
+        foreach ($_SESSION['cart'] as $item):   
+            // Change "name" to "product" since that's what you set in the cart  
+            $product_name = htmlspecialchars($item['product'] ?? 'Unknown Product');  
+            $product_price = htmlspecialchars($item['price'] ?? 0);  
+            $quantity = htmlspecialchars($item['quantity'] ?? 1);  
+            $image_src = htmlspecialchars($item['imageSrc'] ?? ''); // Ensure to use the imageSrc key  
+
+            $total_amount += $product_price * $quantity;  
+        ?>  
+            <li>  
+                <img src="<?= $image_src ?>" alt="<?= $product_name ?>" style="width: 100px; height: 100px; margin-right: 10px;">  
+                <?= $product_name ?> - ₱<?= number_format($product_price, 2) ?> x <?= $quantity ?>  
+            </li>  
+        <?php endforeach; ?>  
+    </ul>  
+    <h3>Total: ₱<?php echo number_format($total_amount, 2); ?></h3>
+    <button type="button" class="pay-now">Pay Now</button>  
+<?php else: ?>  
+    <p>No items in your cart.</p>  
+<?php endif; ?>
+    </section>
     <?php
         if ($order_placed) {
             echo "<script>showConfirmation();</script>";
         }
     ?>
-
+</div>
 </body>
 </html>

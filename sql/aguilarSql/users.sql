@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 05:18 PM
+-- Generation Time: Nov 08, 2024 at 08:42 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -29,22 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `firstName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `firstName` varchar(55) NOT NULL,
+  `lastName` varchar(55) NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(55) NOT NULL,
+  `password` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`) VALUES
-(1, 'Paul', 'Palaroan', 'paul@palaroan.com', 'paul123'),
-(2, 'Paul Andrei', 'Palaroan', 'scatoladidolci23@gmail.com', '$2y$10$oPtVsnSWqESv8'),
-(3, 'vien', 'olarte', 'vivien@gmail.com', 'olarte123'),
-(4, 'alex', 'olarte', 'alex@olarte.com', '1234567899876543210'),
-(5, 'alex', 'olarte', 'alex@olarte.com', '1234567899876543210');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `address`, `email`, `password`) VALUES
+(1, 'Paul Andrei', 'Palaroan', 'DRR compound. Quezon Avenue Ext., Mamala 2', 'scatoladidolci23@gmail.com', 'paul123'),
+(2, 'vivien', 'olarte', 'mataas na lupa', 'olarteznavivien@gmail.com', 'avicleoalicutie'),
+(3, 'windyl', 'aguilar', 'cainta, rizal', 'windylhindot@gmail.com', 'windyl123');
 
 --
 -- Indexes for dumped tables
@@ -64,7 +63,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

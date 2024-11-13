@@ -2,7 +2,7 @@
 $host = "localhost"; // Database configuration
 $user = "root";
 $password = "";
-$db = "ecom";
+$db = "user";
 
 session_start(); // Start a session
 

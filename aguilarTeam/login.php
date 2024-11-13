@@ -1,27 +1,31 @@
 <?php
+session_start(); // Start session at the top
 include 'db_connect.php'; // Include the database connection file
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT password FROM users WHERE email = ?";
+    $sql = "SELECT id, password FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($stored_password);
+        $stmt->bind_result($user_id, $stored_password);
         $stmt->fetch();
 
         // Directly compare the stored plain text password with the input password
         if ($password === $stored_password) {
-            header("Location: homeUser.php");
-            // Redirect to a dashboard or home page
+            // Set session variable for the logged-in user
+            $_SESSION["id"] = $user_id;
+            
+            // Redirect to the profile page
+            header("Location: UserProfile.php");
+            exit();
         } else {
             echo "Invalid password. Please try again.";
-
         }
     } else {
         echo "No account found with that email.";
