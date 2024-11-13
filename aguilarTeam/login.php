@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirect to a dashboard or home page
         } else {
             echo "Invalid password. Please try again.";
+
         }
     } else {
         echo "No account found with that email.";
