@@ -14,8 +14,8 @@
         <a href="#"><img src="images/logo.png" alt="" class="logo"></a>
 
         <ul class="navlist">
-            <li><a href="index.php">home</a></li>
-            <li><b><a href="new.php">new</a></b></li>
+            <!-- <li><a href="index.php">home</a></li> -->
+            <li><b><a href="new.php">home</a></b></li>
             <li><a href="makeup.php">makeup</a></li>
             <li><a href="skincare.php">skincare</a></li>
             <li><a href="allProducts.php">product</a></li>
@@ -23,9 +23,9 @@
         </ul>
 
         <div class="right-content">
-            <a href="#"><img src="images/search.png" alt="" class="search"></a>
-            <a href="#"><img src="images/profile.png" alt="" class="profile"></a>
-            <a href="#"><img src="images/cart.png" alt="" class="cart1"></a>
+            <!-- <a href="#"><img src="images/search.png" alt="" class="search"></a> -->
+            <a href="aguilarTeam\login.php"><img src="images/profile.png" alt="" class="profile"></a>
+            <a href="gabTeam\Payment.php"><img src="images/cart.png" alt="" class="cart1"></a>
         </div>
         </header>
     <!-- end of header -->
