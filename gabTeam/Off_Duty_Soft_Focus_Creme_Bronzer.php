@@ -152,91 +152,88 @@
         </div>
     </section>
   
-    <script>
-        // Initialize cart from sessionStorage or set it to an empty array if not set
-        let cartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
+    <script>  
+    // Initialize cart from sessionStorage or set it to an empty array if not set  
+    let cartItems = JSON.parse(sessionStorage.getItem('cart')) || [];  
 
-        // Function to change product image on thumbnail click
-        function changeProductImage(thumbnail) {
-            var mainImage = document.getElementById("mainProductImage");
-            var tempSrc = mainImage.src;
-            mainImage.src = thumbnail.src;
-            thumbnail.src = tempSrc;
-        }
+    // Function to change product image on thumbnail click  
+    function changeProductImage(thumbnail) {  
+        const mainImage = document.getElementById("mainProductImage");  
+        mainImage.src = thumbnail.src;  
+    }  
 
-        // Function to add item to cart with main image
-        function addToCart(product, price, imageSrc) {
-            const existingItemIndex = cartItems.findIndex(item => item.product === product);
-            if (existingItemIndex !== -1) {
-                cartItems[existingItemIndex].quantity += 1; // Increase quantity if product already in cart
-            } else {
-                cartItems.push({ product, price, quantity: 1, imageSrc }); // Add new item with image
-            }
-            updateCartPopup();
-            saveCartToSession();
-        }
+    // Function to add item to cart with main image  
+    function addToCart(product, price, imageSrc) {  
+        const existingItemIndex = cartItems.findIndex(item => item.product === product);  
+        if (existingItemIndex !== -1) {  
+            cartItems[existingItemIndex].quantity += 1; // Increase quantity if product already in cart  
+        } else {  
+            cartItems.push({ product, price, quantity: 1, imageSrc }); // Add new item with image  
+        }  
+        updateCartPopup();  
+        saveCartToSession();  
+    }  
 
-        // Update the cart popup with items
-        function updateCartPopup() {
-        const cartPopup = document.getElementById('cartPopup');
-        const cartItemsContainer = cartPopup.querySelector('.cart-items');
-        cartItemsContainer.innerHTML = ''; // Clear the existing items
+    // Update the cart popup with items  
+    function updateCartPopup() {  
+        const cartPopup = document.getElementById('cartPopup');  
+        const cartItemsContainer = cartPopup.querySelector('.cart-items');  
+        cartItemsContainer.innerHTML = ''; // Clear existing items  
 
-        cartItems.forEach((item, index) => {
-            const cartItemElement = document.createElement('div');
-            cartItemElement.classList.add('cart-item');
-            cartItemElement.innerHTML = ` 
-                <img src="img/Face/Off Duty Soft Focus Creme Bronzer/IMG_0301.WEBP" alt="${item.product}" style="width: 50px; height: 50px; margin-right: 10px;">
-                <span>${item.product}</span> - <span>₱${item.price}</span>
-                <div class="quantity-control">
-                    <button onclick="changeQuantity(${index}, -1)">-</button>
-                    <input type="text" value="${item.quantity}" readonly>
-                    <button onclick="changeQuantity(${index}, 1)">+</button>
-                </div>
-                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-            `;
-            cartItemsContainer.appendChild(cartItemElement);
-        });
+        cartItems.forEach((item, index) => {  
+            const cartItemElement = document.createElement('div');  
+            cartItemElement.classList.add('cart-item');  
+            cartItemElement.innerHTML = `   
+                <img src="${item.imageSrc}" alt="${item.product}" style="width: 50px; height: 50px; margin-right: 10px;">  
+                <span>${item.product}</span> - <span>₱${item.price}</span>  
+                <div class="quantity-control">  
+                    <button onclick="changeQuantity(${index}, -1)">-</button>  
+                    <input type="text" value="${item.quantity}" readonly>  
+                    <button onclick="changeQuantity(${index}, 1)">+</button>  
+                </div>  
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>  
+            `;  
+            cartItemsContainer.appendChild(cartItemElement);  
+        });  
 
-        // Display the Proceed to Checkout button if there are items in the cart
-        const checkoutButton = document.getElementById('checkoutBtn');
-        if (cartItems.length > 0) {
-            checkoutButton.style.display = 'block';
-            // Convert the cartItems to a URL-safe string
-            const cartData = encodeURIComponent(JSON.stringify(cartItems));
-            document.querySelector('.checkout-btn').parentElement.href = `Payment.php?cartData=${cartData}`;
-        } else {
-            checkoutButton.style.display = 'none';
-        }
-            }
+        // Display the Proceed to Checkout button if there are items in the cart  
+        const checkoutButton = document.getElementById('checkoutBtn');  
+        if (cartItems.length > 0) {  
+            checkoutButton.style.display = 'block';  
+            const cartData = encodeURIComponent(JSON.stringify(cartItems));  
+            document.querySelector('.checkout-btn').parentElement.href = `Payment.php?cartData=${cartData}`;  
+        } else {  
+            checkoutButton.style.display = 'none';  
+        }  
+    }  
 
-        // Save cart to sessionStorage
-        function saveCartToSession() {
-            sessionStorage.setItem('cart', JSON.stringify(cartItems));
-        }
+    // Save cart to sessionStorage  
+    function saveCartToSession() {  
+        sessionStorage.setItem('cart', JSON.stringify(cartItems));  
+    }  
 
-        // Remove item from cart
-        function removeItem(index) {
-            cartItems.splice(index, 1);
-            updateCartPopup();
-            saveCartToSession();
-        }
+    // Remove item from cart  
+    function removeItem(index) {  
+        cartItems.splice(index, 1);  
+        updateCartPopup();  
+        saveCartToSession();  
+    }  
 
-        // Change the quantity of an item
-        function changeQuantity(index, change) {
-            const newQuantity = cartItems[index].quantity + change;
-            if (newQuantity > 0) {
-                cartItems[index].quantity = newQuantity;
-                updateCartPopup();
-                saveCartToSession();
-            }
-        }
+    // Change the quantity of an item  
+    function changeQuantity(index, change) {  
+        const newQuantity = cartItems[index].quantity + change;  
+        if (newQuantity > 0) {  
+            cartItems[index].quantity = newQuantity;  
+            updateCartPopup();  
+            saveCartToSession();  
+        }  
+    }  
 
-        // Show cart popup when cart icon is clicked
-        document.getElementById('cartIcon').addEventListener('click', function () {
-            document.getElementById('cartPopup').classList.toggle('open');
-        });
-    </script>
+    // Show cart popup when cart icon is clicked  
+    document.getElementById('cartIcon').addEventListener('click', function () {  
+        document.getElementById('cartPopup').classList.toggle('open');  
+    });  
+</script>
 <!-- Cart Popup -->
 <div id="cartPopup">
         <div class="cart-header">

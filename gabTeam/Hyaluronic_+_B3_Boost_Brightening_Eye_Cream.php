@@ -182,7 +182,7 @@
             const cartItemElement = document.createElement('div');  
             cartItemElement.classList.add('cart-item');  
             cartItemElement.innerHTML = `   
-                <img src="${item.imageSrc}" alt="${item.product}" style="width: 80px; height: 80px; margin-right: 10px;">  
+                <img src="${item.imageSrc}" alt="${item.product}" style="width: 50px; height: 50px; margin-right: 10px;">  
                 <span>${item.product}</span> - <span>₱${item.price}</span>  
                 <div class="quantity-control">  
                     <button onclick="changeQuantity(${index}, -1)">-</button>  

@@ -245,6 +245,8 @@
             <button class="checkout-btn" id="checkoutBtn" style="display: none;">Proceed to Checkout</button>
         </a>
     </div>  
+
+    
     <footer class="footer">   
         <div class="footer-logo">  
             <img src="img/Logo.png" alt="Logo" style="width: 80px;">  

@@ -1,134 +1,170 @@
 <?php
 session_start();
 
+// Handle incoming cart data from GET request
+if (isset($_GET['cartData'])) {
+    $cartData = json_decode(urldecode($_GET['cartData']), true);
+    $_SESSION['cart'] = $cartData; // Store it in the session for further processing
+} elseif (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = []; // Initialize if no cart data is provided
+}
+
+// Database connection
+$conn = new mysqli('localhost', 'root', '', 'ecom');
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve user information based on session
+$user_info = [];
+if (isset($_SESSION['id'])) {
+    $user_id = $_SESSION['id'];
+    $query = "SELECT id, email, firstName, lastName, address FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($id, $email, $first_name, $last_name, $address);
+
+    if ($stmt->fetch()) {
+        $user_info = [
+            'id' => $id,
+            'email' => $email,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'address' => $address,
+        ];
+    }
+    $stmt->close();
+}
+
 $order_placed = false;
-$payment_method = '';
-if (isset($_GET['cartData'])) {  
-    $cartData = json_decode(urldecode($_GET['cartData']), true);  
-    $_SESSION['cart'] = $cartData; // Save cart data in session  
-} else {  
-    $_SESSION['cart'] = []; // Initialize if no cart data is provided  
-}  
+$orders_id = null; // Initialize orders_id
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $contact_info = $_POST['contact'];  
     $region = $_POST['region'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $address = $_POST['address'];
     $apartment = $_POST['apartment'];
     $postal_code = $_POST['postal'];
     $city = $_POST['city'];
     $phone = $_POST['phone'];
-    $payment_method = $_POST['payment_method'];  
+    $payment_method = $_POST['payment_method'];
+    $user_id = $user_info['id'];
 
-    // Simulate order placed without DB interaction
-    $order_placed = true;
+    // Insert data into orders table
+    $stmt = $conn->prepare("INSERT INTO orders (user_id, region, apartment, postal_code, city, phone, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssss", $user_id, $region, $apartment, $postal_code, $city, $phone, $payment_method);
+
+    if ($stmt->execute()) {
+        // Get the last inserted orders ID
+        $orders_id = $stmt->insert_id;
+        $order_placed = true;
+
+        // Now insert each item in the cart into order_items table
+        $orderItemsStmt = $conn->prepare("INSERT INTO order_items (orders_id, product, price, quantity, region) VALUES (?, ?, ?, ?, ?)");
+
+        foreach ($_SESSION['cart'] as $item) {
+            $product_name = $item['product'];
+            $product_price = $item['price'];
+            $product_quantity = $item['quantity'];
+            $region = $_POST['region']; // Get the selected region
+
+            $orderItemsStmt->bind_param("issii", $orders_id, $product_name, $product_price, $product_quantity, $region);
+            $orderItemsStmt->execute();
+        }
+
+        $orderItemsStmt->close();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+    $stmt->close();
 }
-?>
 
+// Close the database connection
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="assets/css/Payment.css" rel="stylesheet">
-    <script>
-        function showConfirmation() {
-            let confirmation = confirm("Your order has been placed successfully! Click OK to continue.");
-            if (confirmation) {
-                window.location.href = document.referrer;  
-            }
-        }
-
-        function selectPaymentMethod(method) {
-            document.getElementById('payment_method').value = method;
-        }
-    </script>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="assets/css/payment.css">
 </head>
 <body>
 
-    <nav>
-        <div class="logo">
-            <img src="img/Logo.png" alt="Logo">
+<div class="payment-container">
+    <!-- Left Card: Payment Form -->
+    <form method="post" action="" class="card form-container">
+        <h2>Delivery Information</h2>
+        <input type="text" id="firstname" name="first_name" value="<?= htmlspecialchars($user_info['first_name'] ?? '') ?>" placeholder="First Name" required>
+        <input type="text" id="lastname" name="last_name" value="<?= htmlspecialchars($user_info['last_name'] ?? '') ?>" placeholder="Last Name" required>
+        <input type="text" id="address" name="address" value="<?= htmlspecialchars($user_info['address'] ?? '') ?>" placeholder="Address" required>
+        
+        <select id="region" name="region" required>
+            <option value="" disabled selected>Select region</option>
+            <?php
+            $regions = ['Region 1', 'Region 2'];
+            foreach ($regions as $region) {
+                echo "<option value='$region'>$region</option>";
+            }
+            ?>
+        </select>
+        <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, etc." required>
+        <input type="text" id="postal" name="postal" placeholder="Postal Code" required>
+        <input type="text" id="city" name="city" placeholder="City" required>
+        <input type="text" id="phone" name="phone" placeholder="Phone Number" required>
+
+        <h2>Payment Method</h2>
+        <div class="payment-methods">
+            <label for="gcash">GCash</label>
+            <input type="radio" id="gcash" name="payment_method" value="GCash" required>
+            <label for="bpi">BPI</label>
+            <input type="radio" id="bpi" name="payment_method" value="BPI" required>
+            <label for="cod">Cash on Delivery</label>
+            <input type="radio" id="cod" name="payment_method" value="COD" required>
+            <label for="maya">Maya</label>
+            <input type="radio" id="maya" name="payment_method" value="Maya" required>
+            <label for="bdo">BDO</label>
+            <input type="radio" id="bdo" name="payment_method" value="BDO" required>
+            <label for="visa">Visa</label>
+            <input type="radio" id="visa" name="payment_method" value="Visa" required>
         </div>
-        <div class="icons">  
-            <i class="bi bi-search"></i>  
-            <i class="bi bi-person-circle"></i>  
-            <i class="bi bi-cart"></i>  
-        </div>
-    </nav>
-    
 
-    <section class="payment-container">
-        <form method="POST" action="Payment.php">
-            <div class="form-container">
-                <h2 style="font-size: 16px;">Contact Information</h2>
-                <input type="text" id="contact" name="contact" placeholder="Email or phone number" required>
+        <button type="submit" class="pay-now">Pay Now</button>
+    </form>
 
-                <h2 style="font-size: 16px;">Delivery Information</h2>
-                <select id="region" name="region" required>
-                    <option>Select region</option>
-                    <option>Region 1</option>
-                    <option>Region 2</option>
-                </select>
-
-                <input type="text" id="firstname" name="firstname" placeholder="First name" required>
-                <input type="text" id="lastname" name="lastname" placeholder="Last name" required>
-                <input type="text" id="address" name="address" placeholder="Address" required>
-                <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, etc." required>
-                <input type="text" id="postal" name="postal" placeholder="Postal Code" required>
-                <input type="text" id="city" name="city" placeholder="City" required>
-                <input type="text" id="phone" name="phone" placeholder="Phone" required>
-
-                <h2 style="font-size: 16px;">Payment Method</h2>
-                <div class="payment-methods">
-                    <img src="img/payment-img/gcash.png" alt="GCash" onclick="selectPaymentMethod('GCash')">
-                    <img src="img/payment-img/bpi.png" alt="BPI" onclick="selectPaymentMethod('BPI')">
-                    <img src="img/payment-img/cod.png" alt="Cash on Delivery" onclick="selectPaymentMethod('COD')">
-                    <img src="img/payment-img/maya.png" alt="Maya" onclick="selectPaymentMethod('Maya')">
-                    <img src="img/payment-img/bdo.png" alt="BDO" onclick="selectPaymentMethod('BDO')">
-                    <img src="img/payment-img/visa.png" alt="Visa" onclick="selectPaymentMethod('Visa')">
-                </div>
-                <input type="hidden" name="payment_method" id="payment_method">
-            </div>
-        </form>
-
-        <div class="summary-container">
-                <h2 style="font-size: 16px;">Order Summary</h2>
-                <?php if (!empty($_SESSION['cart'])): ?>  
-    <ul class="order-summary">  
-        <?php  
-        $total_amount = 0;  
-        foreach ($_SESSION['cart'] as $item):   
-            // Change "name" to "product" since that's what you set in the cart  
-            $product_name = htmlspecialchars($item['product'] ?? 'Unknown Product');  
-            $product_price = htmlspecialchars($item['price'] ?? 0);  
-            $quantity = htmlspecialchars($item['quantity'] ?? 1);  
-            $image_src = htmlspecialchars($item['imageSrc'] ?? ''); // Ensure to use the imageSrc key  
-
-            $total_amount += $product_price * $quantity;  
-        ?>  
-            <li>  
-                <img src="<?= $image_src ?>" alt="<?= $product_name ?>" style="width: 100px; height: 100px; margin-right: 10px;">  
-                <?= $product_name ?> - ₱<?= number_format($product_price, 2) ?> x <?= $quantity ?>  
-            </li>  
-        <?php endforeach; ?>  
-    </ul>  
-    <h3>Total: ₱<?php echo number_format($total_amount, 2); ?></h3>
-    <button type="button" class="pay-now">Pay Now</button>  
-<?php else: ?>  
-    <p>No items in your cart.</p>  
-<?php endif; ?>
-    </section>
-    <?php
-        if ($order_placed) {
-            echo "<script>showConfirmation();</script>";
-        }
-    ?>
+    <!-- Right Card: Order Summary -->
+    <div class="card summary-container">
+        <h2>Order Summary</h2>
+        <?php if (!empty($_SESSION['cart'])): ?>
+            <ul class="order-summary">
+                <?php
+                $total_amount = 0;
+                foreach ($_SESSION['cart'] as $item):
+                    $product_name = htmlspecialchars($item['product'] ?? 'Unknown Product');
+                    $product_price = htmlspecialchars($item['price'] ?? 0);
+                    $quantity = htmlspecialchars($item['quantity'] ?? 1);
+                    $image_src = htmlspecialchars($item['imageSrc'] ?? '');
+                    $total_amount += $product_price * $quantity;
+                ?>
+                    <li>
+                        <img src="<?= $image_src ?>" alt="<?= $product_name ?>" style="width: 100px; height: 100px; margin-right: 10px;">
+                        <?= $product_name ?> - ₱<?= number_format($product_price, 2) ?> x <?= $quantity ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <h3>Total: ₱<?php echo number_format($total_amount, 2); ?></h3>
+        <?php else: ?>
+            <p>No items in your cart.</p>
+        <?php endif; ?>
+    </div>
 </div>
+
+<?php  
+// Show confirmation if the order was placed successfully  
+if ($order_placed && $orders_id !== null) {  
+    echo "<script>alert('Order placed successfully! Your Order ID is: $orders_id.');</script>";  
+}  
+?>
+
 </body>
 </html>
