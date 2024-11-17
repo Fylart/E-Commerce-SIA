@@ -11,6 +11,7 @@
 <body>
     <?php
     include("html/aboutUs.html");
+    include("html/footer.html");
     ?>
 </body>
-</html> 
+</html>

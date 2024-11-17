@@ -99,17 +99,17 @@
             </div>  
             <nav>  
                 <ul class="nav">  
-                    <li class="nav-item"><a class="nav-link" href="#">home</a></li>  
-                    <li class="nav-item"><a class="nav-link" href="#">new</a></li>  
-                    <li class="nav-item"><a class="nav-link" href="#">makeup</a></li>  
-                    <li class="nav-item"><a class="nav-link" href="#">skincare</a></li>  
+                    <!-- <li class="nav-item"><a class="nav-link" href="#">home</a></li>  --> 
+                    <li class="nav-item"><a class="nav-link" href="../new.php">home</a></li>  
+                    <li class="nav-item"><a class="nav-link" href="../makeup.php">makeup</a></li>  
+                    <li class="nav-item"><a class="nav-link" href="../skincare.php">skincare</a></li>  
                     <li class="nav-item"><a class="nav-link" href="#">sale</a></li>  
                     <li class="nav-item"><a class="nav-link" href="#">about us</a></li>  
                 </ul>  
             </nav>  
             <div class="icons">  
-                <i class="bi bi-search"></i>  
-                <i class="bi bi-person-circle"></i>  
+                <!-- <i class="bi bi-search"></i>   -->
+                <a href="../aguilarTeam\login.php"><i class="bi bi-person-circle"></i></a>
                 <i class="bi bi-cart" id="cartIcon" style="cursor: pointer;"></i>  
             </div>  
         </div>  

@@ -14,8 +14,8 @@
         <a href="#"><img src="images/logo.png" alt="" class="logo"></a>
 
         <ul class="navlist">
-            <li><a href="index.php">home</a></li>
-            <li><a href="new.php">new</a></li>
+            <!-- <li><a href="index.php">home</a></li> -->
+            <li><a href="new.php">home</a></li>
             <li><a href="makeup.php">makeup</a></li>
             <li><a href="skincare.php">skincare</a></li>
             <li><b><a href="allProducts.php">product</a></b></li>
@@ -23,9 +23,9 @@
         </ul>
 
         <div class="right-content">
-            <a href="#"><img src="images/search.png" alt="" class="search"></a>
-            <a href="#"><img src="images/profile.png" alt="" class="profile"></a>
-            <a href="#"><img src="images/cart.png" alt="" class="cart1"></a>
+            <!-- <a href="#"><img src="images/search.png" alt="" class="search"></a> -->
+            <a href="aguilarTeam\login.php"><img src="images/profile.png" alt="" class="profile"></a>
+            <a href="gabTeam\Payment.php"><img src="images/cart.png" alt="" class="cart1"></a>
         </div>
         </header>
     <!-- end of header -->
@@ -45,18 +45,18 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
 
         <div class="item">
             <a href="gabTeam\Face_Sculpting_Microcurrent_Spheres.php" class="soloPage">
-                <img src="gabTeam/img/Skin/Face Sculpting Microcurrent Spheres/IMG_0325.WEBP" class='itemImg'>
+                <img src="gabTeam/img/Face/Multi-tasking Serum Concealer/IMG_0297.WEBP" class='itemImg'>
                 <h2>Face Sculpting</h2>
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -66,7 +66,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="gabTeam\Holy_Grail_Microblade_Brow_Renew_Shaping_Gel.php" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -76,7 +76,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="gabTeam\Hydration_Microencapsulated_Moisturiser.php" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -86,7 +86,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -96,7 +96,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -106,7 +106,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -116,7 +116,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -126,7 +126,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+        
         </div>
 
         <div class="item">
@@ -136,7 +136,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -146,7 +146,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -156,7 +156,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -166,7 +166,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -176,7 +176,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
         <div class="item">
@@ -186,7 +186,7 @@
             </a>
 
             <h3 class="price">₱499.00</h3>
-            <a href="" class="cart">ADD TO CART</a>
+            
         </div>
 
             <?php
