@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2024 at 07:18 AM
+-- Generation Time: Nov 15, 2024 at 02:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,12 +64,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `region`, `apartment`, `postal_code`, `city`, `phone`, `payment_method`, `created_at`) VALUES
 (1, 2, 'Region 1', 'isaudhboSNFiNASDvjknSLDNFvloSJKNVDliNSOCDmOSLUGJbnlISJNDFJZxvn', '1602', 'Pasig', '09163026630', 'COD', '2024-11-15 01:46:32'),
-(2, 1, 'Region 2', 'isaudhboSNFiNASDvjknSLDNFvloSJKNVDliNSOCDmOSLUGJbnlISJNDFJZxvn', '1602', 'Pasig', '09163026630', 'GCash', '2024-11-15 01:48:51'),
-(3, 3, 'Region 2', 'arezo', '1423', 'Pasig', '9069339946', 'COD', '2024-11-15 02:37:00'),
-(4, 3, 'Region 2', 'Pasig', '1423', 'Pasig', '9069339946', 'BPI', '2024-11-15 02:39:44'),
-(5, 3, 'Region 1', 'test', '12312', 'asd', '432432', 'GCash', '2024-11-15 12:53:02'),
-(6, 1, 'Region 1', 'arezo', '1423', 'Paig', '09171245678', 'BPI', '2024-11-17 03:54:40'),
-(7, 1, 'Region 2', 'arezo', '1423', 'Pasig', '09171245678', 'Maya', '2024-11-17 04:04:49');
+(2, 1, 'Region 2', 'isaudhboSNFiNASDvjknSLDNFvloSJKNVDliNSOCDmOSLUGJbnlISJNDFJZxvn', '1602', 'Pasig', '09163026630', 'GCash', '2024-11-15 01:48:51');
 
 -- --------------------------------------------------------
 
@@ -95,22 +90,7 @@ INSERT INTO `order_items` (`id`, `orders_id`, `product`, `price`, `quantity`, `r
 (2, 1, 'Face Sculpting Microcurrent Spheres', 499.00, 1, '0'),
 (3, 1, 'Holy Grail Microblade Brow Renew Shaping Gel', 499.00, 1, '0'),
 (4, 2, 'Cream Blush', 499.00, 1, '0'),
-(5, 2, 'Perfect Aura Iconic 2in1 Blush and Lip Cream', 499.00, 1, '0'),
-(6, 3, 'Face Sculpting Microcurrent Spheres', 499.00, 1, '0'),
-(7, 3, 'Lip Mallow Pen', 499.00, 1, '0'),
-(8, 3, 'Off Duty Soft Focus Creme Bronzer', 499.00, 1, '0'),
-(9, 3, 'Perfect Aura Iconic 2in1 Blush and Lip Cream', 499.00, 2, '0'),
-(10, 3, 'Holy Grail Lash Lift Mascara', 499.00, 1, '0'),
-(11, 4, 'Face Sculpting Microcurrent Spheres', 499.00, 1, '0'),
-(12, 4, 'Lip Mallow Pen', 499.00, 1, '0'),
-(13, 4, 'Off Duty Soft Focus Creme Bronzer', 499.00, 1, '0'),
-(14, 4, 'Perfect Aura Iconic 2in1 Blush and Lip Cream', 499.00, 2, '0'),
-(15, 4, 'Holy Grail Lash Lift Mascara', 499.00, 1, '0'),
-(16, 5, 'Drawing Tablet', 15000.00, 1, '0'),
-(17, 6, 'Skin Clarity Exfoliating Cleanser', 499.00, 1, '0'),
-(18, 6, 'Tine', 0.01, 1, '0'),
-(19, 7, 'Skin Clarity Exfoliating Cleanser', 499.00, 1, '0'),
-(20, 7, 'Makeup', 20.00, 2, '0');
+(5, 2, 'Perfect Aura Iconic 2in1 Blush and Lip Cream', 499.00, 1, '0');
 
 -- --------------------------------------------------------
 
@@ -132,8 +112,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `stock`, `description`, `imgDir`) VALUES
-(8, 'Tine', 0.01, 1, 'Leron Leron ipsum sinta buko ng papaya', '../images/important(8).jpg'),
-(9, 'Makeup', 20.00, 2, 'Leron Leron ipsum sinta buko ng papaya', '../images/Makeup.jpg');
+(1, 'Drawing Tablet', 15000.00, 1, 'Leron Leron ipsum sinta buko ng papaya', '../images/important.jpg');
 
 -- --------------------------------------------------------
 
@@ -209,19 +188,19 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
