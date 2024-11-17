@@ -41,9 +41,12 @@ hr {
 
 .h2_au {
     margin-top: 10px; / Adjust the spacing as needed /
-    text-align: left;
+    /*text-align: left;
     color: rgb(83 48 54 / 79%);
-    max-width: 1150px; / Set a max width to control paragraph width */
+    max-width: 1150px; / Set a max width to control paragraph width
     margin-left: 0;
-    margin: auto;
+    margin: auto; */
 }
+
+
+
