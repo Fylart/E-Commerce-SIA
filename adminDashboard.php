@@ -11,7 +11,7 @@
 <body>
     <?php
         include("database.php");
-        include("html/header.html");
+        include("html/adminHeader.html");
     
 
         // Prepare the SQL statement
@@ -60,7 +60,7 @@
 
     <?php
         // Close the statement and connection
-        include("html/footer.html");
+      /*   include("html/footer.html"); */
         $stmt->close();
         $conn->close();
     ?>

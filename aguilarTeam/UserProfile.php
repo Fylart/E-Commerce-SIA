@@ -62,5 +62,10 @@ if (!empty($_SESSION["id"])) {
             </div>
         </main>
     </div>
+
+
+    <?php
+        include("../php/adminDashboardOrders.php");
+    ?>
 </body>
 </html>
