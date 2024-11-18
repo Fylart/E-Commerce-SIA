@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/products.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/header.css">
+   <!--  <link rel="stylesheet" href="css/header.css"> -->
     <title>Document</title>
 </head>
 <body>
     <?php
         include("database.php");
-        include("html/adminHeader.html");
+        /* include("html/adminHeader.html"); */
     
 
         // Prepare the SQL statement

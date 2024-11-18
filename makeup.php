@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['email']); // Replace 'user_id' with your session variable for login status
+$profileLink = $isLoggedIn ? "aguilarTeam\UserProfile.php" : "aguilarTeam\UserProfile.php";?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +31,7 @@
 
         <div class="right-content">
             <!-- <a href="#"><img src="images/search.png" alt="" class="search"></a> -->
-            <a href="aguilarTeam\login.php"><img src="images/profile.png" alt="" class="profile"></a>
+            <a href="<?php echo $profileLink; ?>"><img src="images/profile.png" alt="" class="profile"></a>
             <a href="gabTeam\Payment.php"><img src="images/cart.png" alt="" class="cart1"></a>
         </div>
         </header>
