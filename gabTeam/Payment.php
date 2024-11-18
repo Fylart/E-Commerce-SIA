@@ -163,6 +163,8 @@ $conn->close();
 // Show confirmation if the order was placed successfully  
 if ($order_placed && $orders_id !== null) {  
     echo "<script>alert('Order placed successfully! Your Order ID is: $orders_id.');</script>";  
+    header("Location: ../aguilarTeam/UserProfile.php");
+    exit;
 }  
 ?>
 

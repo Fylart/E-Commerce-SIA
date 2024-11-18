@@ -34,79 +34,70 @@
     <link rel="stylesheet" href="../css/products.css">
     <link rel="stylesheet" href="../css/footer.css">
 
-
     <?php
-    include("../database.php");
+include("../database.php");
 
-    // Get the user ID from session
-    session_start();
-    $userId = $_SESSION["id"];
+session_start();
+$userId = $_SESSION["id"];
 
-    // Prepare the SQL statement to fetch order items for the user
-    $sql = "
-        SELECT order_items.orders_id, order_items.product, order_items.price, order_items.quantity
-        FROM order_items
-        JOIN orders ON order_items.orders_id = orders.id
-        WHERE orders.user_id = ?
-    ";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId); // Bind the user ID parameter
+// Prepare the SQL statement to fetch order items for the user
+$sql = "
+    SELECT order_items.id AS order_item_id, order_items.product, order_items.price, order_items.quantity
+    FROM order_items
+    JOIN orders ON order_items.orders_id = orders.id
+    WHERE orders.user_id = ?
+";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId); // Bind the user ID parameter
 
-    // Execute the statement
-    $stmt->execute();
+// Execute the statement
+$stmt->execute();
 
-    // Bind result variables
-    $stmt->bind_result($orderId, $product, $price, $quantity);
-    ?>
+// Bind result variables
+$stmt->bind_result($orderItemId, $product, $price, $quantity);
+?>
 
-    <div id="parentProduct">
-        <h1>EDIT ORDER ITEMS</h1>            
-        <form action="updateOrders.php" method="POST">
-            <table id="products">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Deletion</th> <!-- New Delete column -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Fetch values and output data for each row with input fields
-                    while ($stmt->fetch()) {
-                        echo "<tr>";
-                        echo "<td class='productData'>" . htmlspecialchars($orderId) . "</td>";
-                        echo "<td class='productData'><input type='text' name='product[]' value='" . htmlspecialchars($product) . "' /></td>";
-                        echo "<td class='productData'><input type='number' name='price[]' value='" . htmlspecialchars($price) . "' step='0.01' /></td>";
-                        echo "<td class='productData'><input type='number' name='quantity[]' value='" . htmlspecialchars($quantity) . "' /></td>";
-                        echo "<input type='hidden' name='order_id[]' value='" . htmlspecialchars($orderId) . "' />";
-                        // Add a delete link in the new column
-                        echo "<td class='productData'><a href='delete.php?id=" . htmlspecialchars($orderId) . "' onclick=\"return confirm('Are you sure you want to delete this item?');\">Delete</a></td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-            <div style="text-align: right; margin-top: 20px;">
-                <input type="submit" value="SAVE" id="save"/>
-            </div>
-        </form>
-    </div>
+<div id="parentProduct">
+    <h1>EDIT ORDER ITEMS</h1>            
+    <form action="updateOrders.php" method="POST">
+        <table id="products">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Deletion</th> <!-- New Delete column -->
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Fetch values and output data for each row with input fields
+                while ($stmt->fetch()) {
+                    echo "<tr>";
+                    echo "<td class='productData'><input type='text' name='product[]' value='" . htmlspecialchars($product) . "' disabled /></td>"; // Disabled input for product
+                    echo "<input type='hidden' name='product_hidden[]' value='" . htmlspecialchars($product) . "' />"; // Hidden input for product
+                    echo "<td class='productData'><input type='number' name='price[]' value='" . htmlspecialchars($price) . "' step='0.01' disabled /></td>"; // Disabled input for price
+                    echo "<input type='hidden' name='price_hidden[]' value='" . htmlspecialchars($price) . "' />"; // Hidden input for price
+                    echo "<td class='productData'><input type='number' name='quantity[]' value='" . htmlspecialchars($quantity) . "' /></td>";
+                    echo "<input type='hidden' name='order_item_id[]' value='" . htmlspecialchars($orderItemId) . "' />"; // Unique ID for each item
+                    // Add a delete link in the new column
+                    echo "<td class='productData'><a href='deleteOrders.php?id=" . htmlspecialchars($orderItemId) . "' onclick=\"return confirm('Are you sure you want to delete this item?');\">Delete</a></td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+        <div style="text-align: right; margin-top: 20px;">
+            <input type="submit" value="SAVE" id="save"/>
+        </div>
+    </form>
+</div>
 
-
-
-
-
-
-
-
-        <?php
-        // Close the statement and connection
-        $stmt->close();
-        $conn->close();
-    ?>
+<?php
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+?>
 <!-- 
 <footer>
         <div class="footer_row">

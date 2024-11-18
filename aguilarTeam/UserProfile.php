@@ -40,7 +40,7 @@ if (!empty($_SESSION["id"])) {
                         <li><a href="logout.php">LOG OUT</a></li>
                     </ul>
                 </li>
-                <a href="../index.php" class="store-button">Go to store</a>
+                <a href="../allProducts.php" class="store-button">Go to store</a>
             </div>
         </header>
 
@@ -63,6 +63,7 @@ if (!empty($_SESSION["id"])) {
         </main>
     </div>
 
+    <h1 style="text-align:center; margin-top:2rem; font-size:3rem;">ORDERS</h1>
 
     <?php
         include("../php/adminDashboardOrders.php");

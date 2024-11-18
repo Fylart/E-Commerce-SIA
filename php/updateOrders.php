@@ -1,93 +1,28 @@
 <?php
-  include("../database.php");
-
-
-
+include("../database.php");
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Get posted data from the form
-$orderIds = $_POST['order_id']; // Order IDs for each item
-$products = $_POST['product'];    // Product names
-$prices = $_POST['price'];        // Prices
+$orderItemIds = $_POST['order_item_id']; // Unique IDs for each order item
+$products = isset($_POST['product_hidden']) ? $_POST['product_hidden'] : []; // Get hidden product names
+$prices = isset($_POST['price_hidden']) ? $_POST['price_hidden'] : []; // Get hidden prices
 $quantities = $_POST['quantity']; // Quantities
 
 // Prepare and execute update statements for each order item
-$updates = []; // Array to hold updates
-
-// Group updates by order ID
-for ($i = 0; $i < count($orderIds); $i++) {
-    $orderId = $orderIds[$i];
-    if (!isset($updates[$orderId])) {
-        $updates[$orderId] = [
-            'products' => [],
-            'prices' => [],
-            'quantities' => []
-        ];
-    }
-    
-    // Store product details in the corresponding order ID group
-    $updates[$orderId]['products'][] = $products[$i];
-    $updates[$orderId]['prices'][] = $prices[$i];
-    $updates[$orderId]['quantities'][] = $quantities[$i];
+for ($i = 0; $i < count($orderItemIds); $i++) {
+    $stmt = $conn->prepare("UPDATE order_items SET product=?, price=?, quantity=? WHERE id=?");
+    $stmt->bind_param("sdii", $products[$i], $prices[$i], $quantities[$i], $orderItemIds[$i]);
+    $stmt->execute();
 }
 
-// Now update the database for each order ID group
-foreach ($updates as $orderId => $details) {
-    for ($j = 0; $j < count($details['products']); $j++) {
-        // Prepare and execute update statement for each product in this order ID
-        $stmt = $conn->prepare("UPDATE order_items SET product=?, price=?, quantity=? WHERE orders_id=?");
-        $stmt->bind_param("sdii", $details['products'][$j], $details['prices'][$j], $details['quantities'][$j], $orderId);
-        $stmt->execute();
-    }
-}
+// Close the statement and connection
+$stmt->close();
+$conn->close();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-/*   // Get posted data from the form
-  $orderIds = $_POST['order_id']; // Order IDs for each item
-  $products = $_POST['product'];    // Product names
-  $prices = $_POST['price'];        // Prices
-  $quantities = $_POST['quantity']; // Quantities
-  
-  // Prepare and execute update statements for each order item
-  for ($i = 0; $i < count($orderIds); $i++) {
-      $stmt = $conn->prepare("UPDATE order_items SET product=?, price=?, quantity=? WHERE orders_id=?");
-      $stmt->bind_param("sdii", $products[$i], $prices[$i], $quantities[$i], $orderIds[$i]);
-      $stmt->execute();
-  } */
-  
-  
-  // Redirect back to the edit page or another page after saving
-  header("Location: ../aguilarTeam/UserProfile.php"); // Adjust this URL as needed
-  exit;
+// Redirect back to the edit page or another page after saving
+header("Location: ../aguilarTeam/UserProfile.php"); // Adjust this URL as needed
+exit;
 ?>
