@@ -1,10 +1,3 @@
-<?php
-session_start();
-
-// Check if the user is logged in
-$isLoggedIn = isset($_SESSION['email']); // Replace 'user_id' with your session variable for login status
-$profileLink = $isLoggedIn ? "aguilarTeam\UserProfile.php" : "aguilarTeam\UserProfile.php";?>
-
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
