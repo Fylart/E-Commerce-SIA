@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['email']); // Replace 'user_id' with your session variable for login status
+$profileLink = $isLoggedIn ? "aguilarTeam\UserProfile.php" : "aguilarTeam\UserProfile.php";?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,48 +21,28 @@
         <a href="#"><img src="images/logo.png" alt="" class="logo"></a>
 
         <ul class="navlist">
-            <li><a href="index.php">home</a></li>
-            <li><a href="new.php">new</a></li>
+            <!-- <li><a href="index.php">home</a></li> -->
+            <li><a href="new.php">home</a></li>
             <li><a href="makeup.php">makeup</a></li>
             <li><a href="skincare.php">skincare</a></li>
-            <li><a href="allProducts.php">product</a></li>
-            <li><b><a href="aboutus.php">about us</a></b></li>
+            <li><b><a href="allProducts.php">product</a></b></li>
+            <li><a href="aboutus.php">about us</a></li>
         </ul>
 
         <div class="right-content">
-            <a href="#"><img src="images/search.png" alt="" class="search"></a>
-            <a href="#"><img src="images/profile.png" alt="" class="profile"></a>
-            <a href="#"><img src="images/cart.png" alt="" class="cart1"></a>
-        </div>
-    </header>
-
-
-     <!-- header -->
-    <header>
-        <a href="#"><img src="images/logo.png" alt="" class="logo"></a>
-
-        <ul class="navlist">
-            <li><a href="index.php">home</a></li>
-            <li><a href="new.php">new</a></li>
-            <li><a href="makeup.php">makeup</a></li>
-            <li><a href="skincare.php">skincare</a></li>
-            <li><a href="allProducts.php">product</a></li>
-            <li><b><a href="aboutus.php">about us</a></b></li>
-        </ul>
-
-        <div class="right-content">
-            <a href="#"><img src="images/search.png" alt="" class="search"></a>
-            <a href="#"><img src="images/profile.png" alt="" class="profile"></a>
-            <a href="#"><img src="images/cart.png" alt="" class="cart1"></a>
+            <!-- <a href="#"><img src="images/search.png" alt="" class="search"></a> -->
+            <a href="<?php echo $profileLink; ?>"><img src="images/profile.png" alt="" class="profile"></a>
+            <a href="gabTeam\Payment.php"><img src="images/cart.png" alt="" class="cart1"></a>
         </div>
         </header>
     <!-- end of header -->
+
 
      <section class="aboutUs">
     <h1 class="h1_au">About us</h1>
     <div class="aboutUs">
         <img class="aboutUsimage" src="./images/aboutUs/abotuUsheader.JPG" alt="Background Image">
-        <h2 class="h2_au"> Makeup you love, skincare you deserve. </h2>
+        <h2 class="h1_au"> Makeup you love, skincare you deserve. </h2>
         <p class="p_description">PureAura is dedicated to empowering beauty enthusiasts with high-quality makeup and skincare products 
             that enhance natural beauty while nourishing the skin. Our makeup line is designed with premium ingredients to provide lasting,
             radiant looks, while our skincare ensures the healthy, glowing base you deserve. PureAura embodies the perfect balance of 
